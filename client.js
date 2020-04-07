@@ -40,4 +40,56 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-console.log( employees );
+console.log(employees);
+let annualBonuses = [];
+function calculateBonuses(employeeList) {
+  // let annualBonuses = [];
+
+
+  for (const employee of employeeList) {
+
+
+    let bonusPercentage = 0;
+    if (employee.reviewRating <= 2) {
+      bonusPercentage += 0;
+    }
+    if (employee.reviewRating === 3) {
+      bonusPercentage += .04;
+    }
+    if (employee.reviewRating === 4) {
+      bonusPercentage += .06;
+    }
+    if (employee.reviewRating === 5) {
+      bonusPercentage += .1;
+    }
+    if (employee.employeeNumber.length === 4) {
+      bonusPercentage += 0.05;
+    }
+    if (Number(employee.annualSalary) > 65000) {
+      bonusPercentage -= 0.01;
+    }
+    if (bonusPercentage > 0.13) {
+      bonusPercentage = 0.13;
+    }
+    if (bonusPercentage < 0) {
+      bonusPercentage = 0;
+    }
+
+    let employeeBonus = {
+      name: employee.name,
+      bonusPercentage: bonusPercentage,
+      currentSalary: employee.annualSalary,
+      totalCompensation: (Number(employee.annualSalary) * bonusPercentage + Number(employee.annualSalary)),
+      totalBonus: parseInt(Number(employee.annualSalary) * bonusPercentage),
+    }
+    annualBonuses.push(employeeBonus);
+  }
+
+
+  return annualBonuses;
+};
+
+
+console.log(calculateBonuses(employees));
+
+
